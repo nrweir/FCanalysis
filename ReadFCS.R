@@ -13,5 +13,5 @@ ReadFCS <- function(path){
   sample_ff <- read.FCS(path) # returns initial flowFrame object to reshape
   sample_matrix <- exprs(sample_ff)
   
-  return(sample_matrix)
+  return(data.frame(sample_matrix))
 }
