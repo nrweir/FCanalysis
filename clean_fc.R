@@ -22,5 +22,11 @@ clean_fc <- function(fcs_expt){
   clean_expt[clean_expt < 1] <- NA
   clean_expt[complete.cases(clean_expt)]
   
-  counts <- lapply(list(clean_expt, fcs_expt), count, 
+  counts <- data.frame(lapply(list(clean_expt, fcs_expt), count, vars = sample_names))
+  clean_summary <- data.frame(frac_retained = apply(counts,1,FUN = '/',counts$clean_expt,counts$fcs_expt),
+                              obs_removed = apply(counts,1,FUN = '-', counts$fcs_expt,counts$clean_expt))
+  
+  return(clean_expt,clean_summary)
+  
+  
 }
