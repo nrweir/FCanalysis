@@ -11,7 +11,8 @@ ReadFCS <- function(path){
   require(flowCore)
   
   sample_ff <- read.FCS(path) # returns initial flowFrame object to reshape
-  sample_matrix <- exprs(sample_ff)
+  sample_df <- data.frame(exprs(sample_ff))
+  sample_df$sample_ID <- description(sample_ff)$'TUBE NAME'
   
-  return(data.frame(sample_matrix))
+  return(sample_df)
 }
